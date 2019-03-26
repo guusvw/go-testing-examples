@@ -42,6 +42,7 @@ var (
 )
 
 func TestSqr(t *testing.T) {
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Sqr(tt.args.a); got != tt.want {
@@ -52,6 +53,7 @@ func TestSqr(t *testing.T) {
 }
 
 func TestSqrNative(t *testing.T) {
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := SqrNative(tt.args.a); got != tt.want {
@@ -62,7 +64,11 @@ func TestSqrNative(t *testing.T) {
 }
 
 func TestSqrMath(t *testing.T) {
+	t.Parallel()
 	for _, tt := range tests {
+		if testing.Verbose() {
+			t.Logf("Start test %s", tt.name)
+		}
 		t.Run(tt.name, func(t *testing.T) {
 			if got := SqrMath(tt.args.a); got != tt.want {
 				t.Errorf("SqrMath() = %v, want %v", got, tt.want)
